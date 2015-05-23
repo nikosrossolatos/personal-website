@@ -10,18 +10,13 @@
 	font-weight: bold;
 	font-style: normal;
 }
-@font-face {
-	font-family: "Proxima Nova";
-	src: url('../fonts/ProximaNova-Light.ttf');
-	font-weight: 300;
-	font-style: normal;
-}
 body {
 	color: #fff;
 	background-color:#e9eaed;
 	font-family: "Proxima Nova",Arial,sans-serif;
 	font-size: 16px;
 	line-height: 28px;
+	margin: 0;
 }
 *::before, *::after {
 	box-sizing: border-box;
