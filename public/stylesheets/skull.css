@@ -12,20 +12,14 @@
 .skull-message{
 	display:table-cell;
 	width:100%;
-	vertical-align: middle;
+	vertical-align: bottom;
 	padding-left:78px;
 }
 .skull-message h1{
  	padding-left:15px; 
-	font-size: 64px;
-	white-space: nowrap;
-	overflow: hidden;
-	width:100%;
+	font-size: 48px;
+	display:inline-block;
 	line-height:1;
-	-webkit-animation: typing 2s steps(30, end);
-	-moz-animation:    typing 2s steps(30, end);
-	-o-animation:      typing 2s steps(30, end);
-	animation:         typing 2s steps(30, end);
 }
 .skull-mouth.speak{
   -webkit-animation: speak .7s infinite; /* Safari 4+ */

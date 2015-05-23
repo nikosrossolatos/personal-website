@@ -1,6 +1,6 @@
 {
   "name": "mysite",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -14,5 +14,13 @@
     "morgan": "~1.5.3",
     "normalize.css": "^3.0.3",
     "serve-favicon": "~2.2.1"
+  },
+  "devDependencies": {
+    "browserify": "latest",
+    "watchify": "latest"
+  },
+  "browser": {
+    "element":"./public/javascripts/app/element.js",
+    "skull":"./public/javascripts/app/skull.js"
   }
 }
