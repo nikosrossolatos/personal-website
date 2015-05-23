@@ -1,0 +1,192 @@
+@font-face {
+	font-family: "Proxima Nova";
+	src: url('../fonts/ProximaNova-Regular.ttf');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Proxima Nova";
+	src: url('../fonts/ProximaNova-Semibold.ttf');
+	font-weight: bold;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Proxima Nova";
+	src: url('../fonts/ProximaNova-Light.ttf');
+	font-weight: 300;
+	font-style: normal;
+}
+body {
+	color: #fff;
+	background-color:#e9eaed;
+	font-family: "Proxima Nova",Arial,sans-serif;
+	font-size: 16px;
+	line-height: 28px;
+}
+*::before, *::after {
+	box-sizing: border-box;
+}
+.fullscreen {
+	bottom: 0;
+	height: 100%;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	-webkit-transition: all 0.4s linear 0s;
+	-o-transition: all 0.4s linear 0s;
+	transition: all 0.4s linear 0s;
+	width: 100%;
+	background-image:linear-gradient(rgba(215, 35, 39, 0.7), rgba(215, 35, 39, 0.7)), url("/images/background.jpg");
+	background-size:cover;
+	z-index:-1;
+}
+header{
+	padding:15px;
+	display:table;
+}
+ul{
+	padding: 0;
+	margin: 0;
+}
+h1{
+	margin:0;
+}
+.brand{
+	display:table-cell;
+	vertical-align: middle;
+}
+.nav-menu{
+	display:table-cell;
+	vertical-align: middle;
+	list-style: none;
+	width:100%;
+	text-align: right;
+}
+.nav-menu li{
+	display:inline-block;
+}
+.nav-menu a{
+	text-decoration: none;
+	display:inline-block;
+	color:#fff;
+	font-size:24px;
+	padding:.5em;
+}
+.chat-input{
+	padding:3em 6em;
+}
+
+.blinker{
+	-webkit-animation: blink 1s infinite;
+	-moz-animation:    blink 1s infinite;
+	-o-animation:      blink 1s infinite;
+	animation:         blink 1s infinite;
+}
+@keyframes blink{
+  to{opacity: .0;}
+}
+.input {
+	display: inline-block;
+	margin:2em 0;
+	position: relative;
+	vertical-align: top;
+	z-index: 1;
+	width:100%;
+	max-width:640px;
+}
+.input-field{
+	background-color: transparent;
+	color:#fff;
+	display: block;
+	left: 4px;
+	opacity: 0;
+	padding: 0 0.55em;
+	position: absolute;
+	border: none;
+	top: 14px;
+	font-size:24px;
+	font-weight:bold;
+	height: calc(100% - 8px);
+	width: calc(100% - 28px);
+	-webkit-transform: scale3d(1, 0, 1);
+	-ms-transform: scale3d(1, 0, 1);
+	-o-transform: scale3d(1, 0, 1);
+	transform: scale3d(1, 0, 1);
+	-webkit-transform-origin:  50% 100% 0;
+	-moz-transform-origin:  50% 100% 0;
+	-ms-transform-origin:  50% 100% 0;
+	-o-transform-origin:  50% 100% 0;
+	transform-origin:  50% 100% 0;
+	-webkit-transition: opacity 0.3s ease 0s, transform 0.3s ease 0s;
+	-moz-transition: opacity 0.3s ease 0s, transform 0.3s ease 0s;
+	-o-transition: opacity 0.3s ease 0s, transform 0.3s ease 0s;
+	transition: opacity 0.3s ease 0s, transform 0.3s ease 0s;
+	z-index: 100;
+}
+.input-field:focus + .input-label .input-label-content, .input--filled .input-label-content{
+	-webkit-transform: translate3d(0px, -1.5em, 0px);
+	-ms-transform: translate3d(0px, -1.5em, 0px);
+	-o-transform: translate3d(0px, -1.5em, 0px);
+	transform: translate3d(0px, -1.5em, 0px);
+	outline:none;
+}
+.input-field:focus, .input--filled .input-field{
+	opacity: 1;
+	-webkit-transform: scale3d(1, 1, 1);
+	-ms-transform: scale3d(1, 1, 1);
+	-o-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+	outline:none;
+}
+.input-label::before {
+	border:2px solid #fff;
+	content: "";
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	transform-origin: 50% 100% 0;
+	transition: transform 0.3s ease 0s;
+	width: 100%;
+}
+.input-label {
+	-moz-user-select: none;
+	color: #fff;
+	display: inline-block;
+	font-size: 90%;
+	font-weight: bold;
+	padding: 0 1em;
+}
+.input-label{
+	cursor: text;
+	text-align: left;
+	width: 100%;
+}
+.input-label-content {
+	-webkit-transform-origin: 0 50% 0;
+	-moz-transform-origin: 0 50% 0;
+	-ms-transform-origin: 0 50% 0;
+	-o-transform-origin: 0 50% 0;
+	transform-origin: 0 50% 0;
+	-webkit-transition:  transform 0.3s ease 0s;
+	-moz-transition:  transform 0.3s ease 0s;
+	-o-transition:  transform 0.3s ease 0s;
+	transition:  transform 0.3s ease 0s;
+}
+.input-label-content {
+	display: block;
+	padding: 1.6em 0;
+	position: relative;
+	width: 100%;
+}
+.input-sub{
+	position:absolute;
+	right:0;
+	font-size:14px;
+	font-weight:300;
+}
+@keyframes typing{ 
+	from { width: 0; } 
+} 
+@keyframes blink-caret { 50% { border-color: transparent; } }

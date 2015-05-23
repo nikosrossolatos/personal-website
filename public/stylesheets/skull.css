@@ -1,0 +1,78 @@
+.skull{
+	display:table;
+}
+.skull-head img{
+	display:block;
+}
+.skull-head{
+	display:table-cell;
+	margin-right:1em;
+	vertical-align: middle;
+}
+.skull-message{
+	display:table-cell;
+	width:100%;
+	vertical-align: middle;
+}
+.skull-message h1{
+ 	padding-left:15px; 
+	font-size: 64px;
+	white-space: nowrap;
+	overflow: hidden;
+	width:100%;
+	line-height:1;
+	-webkit-animation: typing 2s steps(30, end);
+	-moz-animation:    typing 2s steps(30, end);
+	-o-animation:      typing 2s steps(30, end);
+	animation:         typing 2s steps(30, end);
+}
+.skull-mouth.speak{
+  -webkit-animation: speak .7s infinite; /* Safari 4+ */
+  -moz-animation:    speak .7s infinite; /* Fx 5+ */
+  -o-animation:      speak .7s infinite; /* Opera 12+ */
+  animation:         speak .7s infinite; /* IE 10+, Fx 29+ */
+}
+@-webkit-keyframes speak {
+	0%,100%   {
+		-webkit-transform: translate3d(0,0,0);
+	}
+	25%,75% {
+		-webkit-transform: translate3d(0,10px,0);
+	}
+	50% {
+		-webkit-transform: translate3d(10px,5px,0);
+	}
+}
+@-moz-keyframes speak {
+	0%,100%   {
+		-moz-transform: translate3d(0,0,0);
+	}
+	25%,75% {
+		-moz-transform: translate3d(0,10px,0);
+	}
+	50% {
+		-moz-transform: translate3d(5px,5px,0);
+	}
+}
+@-o-keyframes speak {
+	0%,100%   {
+		-o-transform: translate3d(0,0,0);
+	}
+	25%,75% {
+		-o-transform: translate3d(0,10px,0);
+	}
+	50% {
+		-o-transform: translate3d(5px,5px,0);
+	}
+}
+@keyframes speak {
+	0%,100%   {
+		transform: translate3d(0,0,0);
+	}
+	25%,75% {
+		transform: translate3d(0,10px,0);
+	}
+	50% {
+		transform: translate3d(5px,5px,0);
+	}
+}
