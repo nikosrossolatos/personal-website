@@ -15,9 +15,9 @@ I will be adding more features when i have the time and expand the prototype wit
 
 ####What's missing
 
-Endpoint operators' dashboard
-Websockets for communication
-Algorithm for the skull-servant responses
+* Endpoint operators' dashboard
+* Websockets for communication
+* Algorithm for the skull-servant responses
 
 ####Modular library
 I will trying to build a modular library for the avatar and messaging systems,
