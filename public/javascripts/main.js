@@ -27,7 +27,7 @@
 	function skullResponse(text) {
 		var clone = skullMessage.cloneNode(true);
 		var response = text || responsesArray[Math.floor(Math.random() * responsesArray.length)];
-		var delay = 1600;
+		var delay = 1400;
 		skullSpeak(delay);
 		clone.textContent = response;
 		var parent = skullMessage.parentNode;
