@@ -11,6 +11,7 @@
 	});
 	form.addEventListener("submit", function(ev){
 		ev.preventDefault();
+		inputEl.value = ''
 		skullResponse()
 	}, false);
 	inputEl.addEventListener( 'focus', onInputFocus );

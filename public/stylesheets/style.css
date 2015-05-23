@@ -56,6 +56,11 @@ h1{
 	display:table-cell;
 	vertical-align: middle;
 }
+.name{
+	display:table-cell;
+	vertical-align: middle;
+	padding-left:1em;
+}
 .nav-menu{
 	display:table-cell;
 	vertical-align: middle;
