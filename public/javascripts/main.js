@@ -1,6 +1,6 @@
 (function() {
    // page initialization
-	skullSpeak(1400);
+	skullSpeak(1600);
 	var responsesArray = ['You should be ashamed !','Oh really?','Let me take a screenshot of that','Why dont you contact him?']
 	var inputEl = document.getElementById('input-1');
 	var form = document.getElementById('typing-form');
@@ -27,7 +27,7 @@
 	function skullResponse(text) {
 		var clone = skullMessage.cloneNode(true);
 		var response = text || responsesArray[Math.floor(Math.random() * responsesArray.length)];
-		var delay = 1400;
+		var delay = 1600;
 		skullSpeak(delay);
 		clone.textContent = response;
 		var parent = skullMessage.parentNode;
