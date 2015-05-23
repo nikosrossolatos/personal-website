@@ -1,18 +1,19 @@
 .skull{
 	display:table;
 }
-.skull-head img{
-	display:block;
-}
 .skull-head{
 	display:table-cell;
 	margin-right:1em;
 	vertical-align: middle;
 }
+.skull-mouth,.skull-upperhead{
+	display:block;
+}
 .skull-message{
 	display:table-cell;
 	width:100%;
 	vertical-align: middle;
+	padding-left:78px;
 }
 .skull-message h1{
  	padding-left:15px; 

@@ -125,10 +125,10 @@ h1{
 	z-index: 100;
 }
 .input-field:focus + .input-label .input-label-content, .input--filled .input-label-content{
-	-webkit-transform: translate3d(0px, -1.5em, 0px);
-	-ms-transform: translate3d(0px, -1.5em, 0px);
-	-o-transform: translate3d(0px, -1.5em, 0px);
-	transform: translate3d(0px, -1.5em, 0px);
+	-webkit-transform: translate3d(0px, -1.15em, 0px) scale3d(0.8, 0.8, 1);
+	-ms-transform: translate3d(0px, -1.15em, 0px) scale3d(0.8, 0.8, 1);
+	-o-transform: translate3d(0px, -1.15em, 0px) scale3d(0.8, 0.8, 1);
+	transform: translate3d(0px, -1.15em, 0px) scale3d(0.8, 0.8, 1);
 	outline:none;
 }
 .input-field:focus, .input--filled .input-field{
@@ -154,7 +154,7 @@ h1{
 	-moz-user-select: none;
 	color: #fff;
 	display: inline-block;
-	font-size: 90%;
+	font-size: 100%;
 	font-weight: bold;
 	padding: 0 1em;
 }
@@ -176,9 +176,10 @@ h1{
 }
 .input-label-content {
 	display: block;
-	padding: 1.6em 0;
+	padding: 1.5em 0;
 	position: relative;
 	width: 100%;
+	font-size:20px;
 }
 .input-sub{
 	position:absolute;
