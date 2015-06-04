@@ -7,13 +7,22 @@ var Skull = require('skull');
 	var inputEl = document.getElementById('input-1');
 	var form = document.getElementById('typing-form');
 	var contactButton = document.getElementById('contact');
+	var linkedinButton = document.getElementById('linkedin');
+	var facebookButton = document.getElementById('facebook');
 	contactButton.addEventListener('click',function(){
 		avatar.response('My master\'s email is nikos@panelsensor.com !');
 	});
+	linkedinButton.addEventListener('click',function(){
+		avatar.response('Go to https://gr.linkedin.com/in/nikosrossolatos');
+	});
+	facebookButton.addEventListener('click',function(){
+		avatar.response('Oh no no. Facebook is private. Unless you are a girl ;) ');
+	});
 	form.addEventListener("submit", function(ev){
 		ev.preventDefault();
+		var reply = inputEl.value;
 		inputEl.value = ''
-		avatar.response()
+		avatar.response(false,reply);
 	}, false);
 	inputEl.addEventListener( 'focus', onInputFocus );
 	inputEl.addEventListener( 'blur', onInputBlur );

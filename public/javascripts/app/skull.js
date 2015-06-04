@@ -3,7 +3,11 @@
 *	Feel free to use it anywhere you like
 */
 var Element = require('element');
-var responsesArray = ['You should be ashamed !','Oh really?','Let me take a screenshot of that','Why dont you contact him?'];
+var responsesArray = ['Why dont you contact him?','I\'ll let him know','My master is busy right now'];
+var badWords = ['fuck','asshole','retard','screw','crap'];
+var shamingResponses = ['You should be ashamed!','Oh really?','Wanna think about saying that again?','Be careful little lad with yar grammar'];
+var previousResponse;
+var visitorName;
 
 module.exports = function Avatar(el){
 	var avatar = new Skull(el);
@@ -13,7 +17,7 @@ module.exports = function Avatar(el){
 function Skull(el){
 	this.responsesArray = responsesArray;
 	this.parent = el;
-	this.test = 0;
+	this.messageIterator = 0;
 	this._generateAvatar();
 	this.render();
 }
@@ -79,12 +83,15 @@ Skull.prototype.destroy = function(){
 	removeChildren(this.parent);
 }
 
-Skull.prototype.response = function (text) {
-	var response = text || getRandomAnswer(this.responsesArray);
+Skull.prototype.response = function (text,reply) {
+	var response = text || getAnswer(reply);
 	var delay = 1400;
 	this.speak(delay);
 	this.message.textContent = '';
+	//TODO: needs fix Just in case the function hasn't stopped before next response
+	this.messageIterator = 0;
 	this.typingEffect(response);
+	previousResponse = response;
 }
 Skull.prototype.speak = function(delay){
 	var that = this;
@@ -99,21 +106,49 @@ Element.prototype.remove = function() {
 }
 Skull.prototype.typingEffect = function(text){
 	var el = this.message;
-	el.textContent+=text[this.test];
+	el.textContent+=text[this.messageIterator];
 	var that = this;
-	this.test++;
+	this.messageIterator++;
 	if(el.textContent.length < text.length){
 		setTimeout(function(){
 			that.typingEffect(text);
 		},30)
 	}
 	else{
-		this.test = 0;
+		this.messageIterator = 0;
 	}
 }
 
 function getRandomAnswer(array){
 	return array[Math.floor(Math.random() * array.length)];
+}
+function getAnswer(reply){
+	reply = reply.toLowerCase();
+	if (badWords.some(function(v) { return reply.indexOf(v) >= 0; })) {
+	    // There's at least one
+	    return getRandomAnswer(shamingResponses);
+	}
+	else if(reply.indexOf('hi')>=0 || reply.indexOf('hello')>=0){
+		return 'What is your name lad?'
+	}
+	else if(previousResponse=='What is your name lad?'){
+		if(reply.split(' ').length===1){
+			visitorName = reply.capitalizeFirstLetter();
+		}
+		else{
+			var pos = reply.indexOf('my name is ')
+			visitorName = pos>-1? reply.substring(pos+10,reply.length): ''
+			visitorName = visitorName.capitalizeFirstLetter();
+		}
+		return 'Hi there '+visitorName+'. What would you like of my master?'
+	}
+	else if(previousResponse=='Oh no no. Facebook is private. Unless you are a girl ;) ' && reply.indexOf('im a girl')>-1){
+		return 'Okay i\'ll tell you. But keep it a secret okay?'
+	}
+	else if(previousResponse=='Okay i\'ll tell you. But keep it a secret okay?' && (reply=='okay'>-1 || reply == 'ok' )){
+		return 'Its Nikos Rossolatos. Shhhhhh~'
+	}
+	return getRandomAnswer(responsesArray);
 }
 function removeChildren(node){
 	while (node.firstChild) {
@@ -124,4 +159,7 @@ function removeElement(node) {
     if(node.parentNode){
 		node.parentNode.removeChild(node);
 	}
+}
+String.prototype.capitalizeFirstLetter = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
 }

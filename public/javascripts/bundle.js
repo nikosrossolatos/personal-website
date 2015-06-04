@@ -1,4 +1,43 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var Skull = require('skull');
+(function() {
+   // page initialization
+  	var skullContainer = document.getElementById('skull');
+   	var avatar = new Skull(skullContainer);
+   	
+	var inputEl = document.getElementById('input-1');
+	var form = document.getElementById('typing-form');
+	var contactButton = document.getElementById('contact');
+	var linkedinButton = document.getElementById('linkedin');
+	var facebookButton = document.getElementById('facebook');
+	contactButton.addEventListener('click',function(){
+		avatar.response('My master\'s email is nikos@panelsensor.com !');
+	});
+	linkedinButton.addEventListener('click',function(){
+		avatar.response('Go to https://gr.linkedin.com/in/nikosrossolatos');
+	});
+	facebookButton.addEventListener('click',function(){
+		avatar.response('Oh no no. Facebook is private. Unless you are a girl ;) ');
+	});
+	form.addEventListener("submit", function(ev){
+		ev.preventDefault();
+		var reply = inputEl.value;
+		inputEl.value = ''
+		avatar.response(false,reply);
+	}, false);
+	inputEl.addEventListener( 'focus', onInputFocus );
+	inputEl.addEventListener( 'blur', onInputBlur );
+	function onInputFocus( ev ) {
+		inputEl.parentNode.className =  'input input--filled';
+	}
+
+	function onInputBlur( ev ) {
+		if( ev.target.value.trim() === '' ) {
+			inputEl.parentNode.className = 'input'
+		}
+	}
+})();
+},{"skull":3}],2:[function(require,module,exports){
 module.exports = function (args) {
 	var ret = document.createElement(args.tag);
 	delete args.tag;
@@ -15,13 +54,17 @@ module.exports = function (args) {
 	}
 	return ret;
 }
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 /*
 *	Skull module v.0.1
 *	Feel free to use it anywhere you like
 */
 var Element = require('element');
-var responsesArray = ['You should be ashamed !','Oh really?','Let me take a screenshot of that','Why dont you contact him?'];
+var responsesArray = ['Why dont you contact him?','I\'ll let him know','My master is busy right now'];
+var badWords = ['fuck','asshole','retard','screw','crap'];
+var shamingResponses = ['You should be ashamed!','Oh really?','Wanna think about saying that again?','Be careful little lad with yar grammar'];
+var previousResponse;
+var visitorName;
 
 module.exports = function Avatar(el){
 	var avatar = new Skull(el);
@@ -31,7 +74,7 @@ module.exports = function Avatar(el){
 function Skull(el){
 	this.responsesArray = responsesArray;
 	this.parent = el;
-	this.test = 0;
+	this.messageIterator = 0;
 	this._generateAvatar();
 	this.render();
 }
@@ -97,12 +140,15 @@ Skull.prototype.destroy = function(){
 	removeChildren(this.parent);
 }
 
-Skull.prototype.response = function (text) {
-	var response = text || getRandomAnswer(this.responsesArray);
+Skull.prototype.response = function (text,reply) {
+	var response = text || getAnswer(reply);
 	var delay = 1400;
 	this.speak(delay);
 	this.message.textContent = '';
+	//TODO: needs fix Just in case the function hasn't stopped before next response
+	this.messageIterator = 0;
 	this.typingEffect(response);
+	previousResponse = response;
 }
 Skull.prototype.speak = function(delay){
 	var that = this;
@@ -117,21 +163,49 @@ Element.prototype.remove = function() {
 }
 Skull.prototype.typingEffect = function(text){
 	var el = this.message;
-	el.textContent+=text[this.test];
+	el.textContent+=text[this.messageIterator];
 	var that = this;
-	this.test++;
+	this.messageIterator++;
 	if(el.textContent.length < text.length){
 		setTimeout(function(){
 			that.typingEffect(text);
 		},30)
 	}
 	else{
-		this.test = 0;
+		this.messageIterator = 0;
 	}
 }
 
 function getRandomAnswer(array){
 	return array[Math.floor(Math.random() * array.length)];
+}
+function getAnswer(reply){
+	reply = reply.toLowerCase();
+	if (badWords.some(function(v) { return reply.indexOf(v) >= 0; })) {
+	    // There's at least one
+	    return getRandomAnswer(shamingResponses);
+	}
+	else if(reply.indexOf('hi')>=0 || reply.indexOf('hello')>=0){
+		return 'What is your name lad?'
+	}
+	else if(previousResponse=='What is your name lad?'){
+		if(reply.split(' ').length===1){
+			visitorName = reply.capitalizeFirstLetter();
+		}
+		else{
+			var pos = reply.indexOf('my name is ')
+			visitorName = pos>-1? reply.substring(pos+10,reply.length): ''
+			visitorName = visitorName.capitalizeFirstLetter();
+		}
+		return 'Hi there '+visitorName+'. What would you like of my master?'
+	}
+	else if(previousResponse=='Oh no no. Facebook is private. Unless you are a girl ;) ' && reply.indexOf('im a girl')>-1){
+		return 'Okay i\'ll tell you. But keep it a secret okay?'
+	}
+	else if(previousResponse=='Okay i\'ll tell you. But keep it a secret okay?' && (reply=='okay'>-1 || reply == 'ok' )){
+		return 'Its Nikos Rossolatos. Shhhhhh~'
+	}
+	return getRandomAnswer(responsesArray);
 }
 function removeChildren(node){
 	while (node.firstChild) {
@@ -143,34 +217,7 @@ function removeElement(node) {
 		node.parentNode.removeChild(node);
 	}
 }
-},{"element":1}],3:[function(require,module,exports){
-var Skull = require('skull');
-(function() {
-   // page initialization
-  	var skullContainer = document.getElementById('skull');
-   	var avatar = new Skull(skullContainer);
-   	
-	var inputEl = document.getElementById('input-1');
-	var form = document.getElementById('typing-form');
-	var contactButton = document.getElementById('contact');
-	contactButton.addEventListener('click',function(){
-		avatar.response('My master\'s email is nikos@panelsensor.com !');
-	});
-	form.addEventListener("submit", function(ev){
-		ev.preventDefault();
-		inputEl.value = ''
-		avatar.response()
-	}, false);
-	inputEl.addEventListener( 'focus', onInputFocus );
-	inputEl.addEventListener( 'blur', onInputBlur );
-	function onInputFocus( ev ) {
-		inputEl.parentNode.className =  'input input--filled';
-	}
-
-	function onInputBlur( ev ) {
-		if( ev.target.value.trim() === '' ) {
-			inputEl.parentNode.className = 'input'
-		}
-	}
-})();
-},{"skull":2}]},{},[3]);
+String.prototype.capitalizeFirstLetter = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
+},{"element":2}]},{},[1]);
