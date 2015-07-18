@@ -10,6 +10,7 @@ var Skull = require('skull');
 	var contactButton = document.getElementById('contact');
 	var linkedinButton = document.getElementById('linkedin');
 	var facebookButton = document.getElementById('facebook');
+
 	contactButton.addEventListener('click',function(){
 		avatar.response('My master\'s email is nikos@panelsensor.com !');
 	});
@@ -25,6 +26,7 @@ var Skull = require('skull');
 		inputEl.value = ''
 		avatar.response(false,reply);
 	}, false);
+	
 	inputEl.addEventListener( 'focus', onInputFocus );
 	inputEl.addEventListener( 'blur', onInputBlur );
 	function onInputFocus( ev ) {
