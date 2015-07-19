@@ -1,62 +1,3 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var Skull = require('skull');
-(function() {
-   // page initialization
-  	var skullContainer = document.getElementById('skull');
-   	var avatar = new Skull(skullContainer);
-   	
-	var inputEl = document.getElementById('input-1');
-	var form = document.getElementById('typing-form');
-	var contactButton = document.getElementById('contact');
-	var linkedinButton = document.getElementById('linkedin');
-	var facebookButton = document.getElementById('facebook');
-
-	contactButton.addEventListener('click',function(){
-		avatar.response('My master\'s email is nikos@panelsensor.com !');
-	});
-	linkedinButton.addEventListener('click',function(){
-		avatar.response('Go to https://gr.linkedin.com/in/nikosrossolatos');
-	});
-	facebookButton.addEventListener('click',function(){
-		avatar.response('Oh no no. Facebook is private. Unless you are a girl ;) ');
-	});
-	form.addEventListener("submit", function(ev){
-		ev.preventDefault();
-		var reply = inputEl.value;
-		inputEl.value = ''
-		avatar.response(false,reply);
-	}, false);
-	
-	inputEl.addEventListener( 'focus', onInputFocus );
-	inputEl.addEventListener( 'blur', onInputBlur );
-	function onInputFocus( ev ) {
-		inputEl.parentNode.className =  'input input--filled';
-	}
-
-	function onInputBlur( ev ) {
-		if( ev.target.value.trim() === '' ) {
-			inputEl.parentNode.className = 'input'
-		}
-	}
-})();
-},{"skull":3}],2:[function(require,module,exports){
-module.exports = function (args) {
-	var ret = document.createElement(args.tag);
-	delete args.tag;
-	ret.textContent = args.text || "";
-	delete args.text;
-	if (args.data_attr) {
-		for (var key in args.data_attr) {
-			ret.setAttribute('data-'+key, args.data_attr[key]);
-		}
-	}
-	delete args.data_attr;
-	for (var key in args) {
-		ret.setAttribute(key, args[key]);
-	}
-	return ret;
-}
-},{}],3:[function(require,module,exports){
 /*
 *	Skull module v.0.1
 *	Feel free to use it anywhere you like
@@ -90,12 +31,12 @@ Skull.prototype._generateAvatar = function(){
 		tag:'object',
 		type:'image/svg+xml',
 		class:'skull-upperhead',
-		data:'/images/skull.svg'
+		data:'/img/skull.svg'
 	});
 
 	this.headFallback = Element({
 		tag:'img',
-		src:'/images/skull-head.png',
+		src:'/img/skull-head.png',
 		alt:'skull head'
 	});
 
@@ -104,11 +45,11 @@ Skull.prototype._generateAvatar = function(){
 		type:'image/svg+xml',
 		class:'skull-mouth',
 		id:'skull-mouth',
-		data:'/images/skull-mouth.svg'
+		data:'/img/skull-mouth.svg'
 	});
 	this.mouthFallback = Element({
 		tag:'img',
-		src:'/images/skull-mouth.png',
+		src:'/img/skull-mouth.png',
 		alt:'skull head'
 	});
 	this.messageContainer = Element({
@@ -136,7 +77,19 @@ Skull.prototype.render = function(){
 	this.messageContainer.appendChild(this.message);
 	this.parent.appendChild(this.messageContainer);
 	this.speak(1600);
-	this.response('Hello stranger !');
+
+	var that = this;
+	$.get('/personas', function(data) {
+		/*optional stuff to do after success */
+		visitorName = data.name;
+		if(!visitorName){
+			that.response('Hello stranger !');
+		}
+		else{
+			that.response('Hello '+visitorName+' !');
+		}
+	});
+	
 }
 Skull.prototype.destroy = function(){
 	removeChildren(this.parent);
@@ -151,6 +104,10 @@ Skull.prototype.response = function (text,reply) {
 	this.messageIterator = 0;
 	this.typingEffect(response);
 	previousResponse = response;
+	$.post('/message', {message: response,avatar:true}, function(data, textStatus, xhr) {
+			/*optional stuff to do after success */
+		});
+	return response;
 }
 Skull.prototype.speak = function(delay){
 	var that = this;
@@ -188,6 +145,9 @@ function getAnswer(reply){
 	    return getRandomAnswer(shamingResponses);
 	}
 	else if(reply.indexOf('hi')>=0 || reply.indexOf('hello')>=0){
+		if(visitorName){
+			return 'What would you like of my master today '+visitorName+'?'
+		}
 		return 'What is your name lad?'
 	}
 	else if(previousResponse=='What is your name lad?'){
@@ -199,7 +159,13 @@ function getAnswer(reply){
 			visitorName = pos>-1? reply.substring(pos+10,reply.length): ''
 			visitorName = visitorName.capitalizeFirstLetter();
 		}
+		$.ajax({
+			url: '/personas/',
+			type: 'PUT',
+			data: {name: visitorName},
+		});		
 		return 'Hi there '+visitorName+'. What would you like of my master?'
+		//TODO: Swap out Jquery for some lightweight AJAX lib
 	}
 	else if(previousResponse=='Oh no no. Facebook is private. Unless you are a girl ;) ' && reply.indexOf('im a girl')>-1){
 		return 'Okay i\'ll tell you. But keep it a secret okay?'
@@ -222,4 +188,3 @@ function removeElement(node) {
 String.prototype.capitalizeFirstLetter = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
-},{"element":2}]},{},[1]);

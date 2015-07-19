@@ -6,6 +6,9 @@
 	margin-right:1em;
 	vertical-align: middle;
 }
+.skull-head object{
+	width:78px;
+}
 .skull-mouth,.skull-upperhead{
 	display:block;
 }
@@ -13,7 +16,6 @@
 	display:table-cell;
 	width:100%;
 	vertical-align: bottom;
-	padding-left:78px;
 }
 .skull-message h1{
  	padding-left:15px; 

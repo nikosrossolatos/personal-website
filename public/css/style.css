@@ -32,7 +32,7 @@ body {
 	-o-transition: all 0.4s linear 0s;
 	transition: all 0.4s linear 0s;
 	width: 100%;
-	background-image:linear-gradient(rgba(215, 35, 39, 0.7), rgba(215, 35, 39, 0.7)), url("/images/background.jpg");
+	background-image:linear-gradient(rgba(215, 35, 39, 0.7), rgba(215, 35, 39, 0.7)), url("/img/background.jpg");
 	background-size:cover;
 	z-index:-1;
 }
@@ -47,9 +47,15 @@ ul{
 h1{
 	margin:0;
 }
+object{
+	display:block;
+}
 .brand{
 	display:table-cell;
 	vertical-align: middle;
+}
+.brand object{
+	width:73px;
 }
 .name{
 	display:table-cell;
