@@ -97,13 +97,14 @@ Skull.prototype.destroy = function(){
 
 Skull.prototype.response = function (text,reply) {
 	var response = text || getAnswer(reply);
+	var that = this;
 	$.post('/message', {message: reply}, function(data, textStatus, xhr) {
 		var delay = 1400;
-		this.speak(delay);
-		this.message.textContent = '';
+		that.speak(delay);
+		that.message.textContent = '';
 		//TODO: needs fix Just in case the function hasn't stopped before next response
-		this.messageIterator = 0;
-		this.typingEffect(response);
+		that.messageIterator = 0;
+		that.typingEffect(response);
 		previousResponse = response;
 		$.post('/message', {message: response,avatar:true}, function(data, textStatus, xhr) {
 				/*optional stuff to do after success */
