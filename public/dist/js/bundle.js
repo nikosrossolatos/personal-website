@@ -115,17 +115,19 @@ Skull.prototype.destroy = function(){
 
 Skull.prototype.response = function (text,reply) {
 	var response = text || getAnswer(reply);
-	var delay = 1400;
-	this.speak(delay);
-	this.message.textContent = '';
-	//TODO: needs fix Just in case the function hasn't stopped before next response
-	this.messageIterator = 0;
-	this.typingEffect(response);
-	previousResponse = response;
-	$.post('/message', {message: response,avatar:true}, function(data, textStatus, xhr) {
-			/*optional stuff to do after success */
-		});
-	return response;
+	$.post('/message', {message: reply}, function(data, textStatus, xhr) {
+		var delay = 1400;
+		this.speak(delay);
+		this.message.textContent = '';
+		//TODO: needs fix Just in case the function hasn't stopped before next response
+		this.messageIterator = 0;
+		this.typingEffect(response);
+		previousResponse = response;
+		$.post('/message', {message: response,avatar:true}, function(data, textStatus, xhr) {
+				/*optional stuff to do after success */
+			});
+		return response;		
+	});
 }
 Skull.prototype.speak = function(delay){
 	var that = this;
@@ -234,9 +236,7 @@ var Skull = require('skull');
 		ev.preventDefault();
 		var reply = inputEl.value;
 		inputEl.value = ''
-		$.post('/message', {message: reply}, function(data, textStatus, xhr) {
-			var avatarReply = avatar.response(false,reply);
-		});
+		var avatarReply = avatar.response(false,reply);
 	}, false);
 	
 	inputEl.addEventListener( 'focus', onInputFocus );

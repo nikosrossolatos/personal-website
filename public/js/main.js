@@ -25,9 +25,7 @@ var Skull = require('skull');
 		ev.preventDefault();
 		var reply = inputEl.value;
 		inputEl.value = ''
-		$.post('/message', {message: reply}, function(data, textStatus, xhr) {
-			var avatarReply = avatar.response(false,reply);
-		});
+		var avatarReply = avatar.response(false,reply);
 	}, false);
 	
 	inputEl.addEventListener( 'focus', onInputFocus );
