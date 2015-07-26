@@ -15,6 +15,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var api = require('./routes/api');
 
 var app = express();
 
@@ -37,6 +38,7 @@ app.use(passport.session());
 
 app.use('/', cookies.check,routes);
 app.use('/admin', users);
+app.use('/api', api);
 
 app.post('/login', 
   passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),

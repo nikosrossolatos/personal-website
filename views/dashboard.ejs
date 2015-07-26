@@ -5,9 +5,8 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel='stylesheet' href='/css/style.css' />
     <link rel='stylesheet' href='/css/dashboard.css' />
-
   </head>
-  <body>
+  <body ng-app="mySite">
 	<header class="header">
 		<div class="brand">
 			<object type="image/svg+xml" data="/img/logo.svg"></object>
@@ -19,74 +18,17 @@
 	</header>
 	<section class="fullscreen bg-image"></section>
 	<section class="side-menu">
-		<ul>
-			<li><img class="thunder" src="/img/thunder.svg" alt=""></li>
-			<li class="active"><img src="/img/messages.svg" alt=""></li>
-			<li><img src="/img/gear.svg" alt=""></li>
-			<li><img src="/img/power.svg" alt=""></li>
+		<ul ng-controller="MainController">
+			<a ng-href="#/"><li ng-class="{ active: isActive('/')}"><img class="thunder" src="/img/thunder.svg" alt=""></li></a>
+			<a ng-href="#/messages"><li ng-class="{ active: isActive('/messages')}"><img src="/img/messages.svg" alt=""></li></a>
+			<a ng-href="#settings/"><li ng-class="{ active: isActive('/settings')}"><img src="/img/gear.svg" alt=""></li></a>
+			<a ng-href="#" ng-click="logout()"><li><img src="/img/power.svg" alt=""></li></a>
 		</ul>
 	</section>
-	<section class="main-container">
-		<section class="personas">
-			<nav class="clearfix">
-				<p>33 chats</p>
-				<div class="filter">
-					<select name="filter" class="prm-color">
-						<option value="online">Online</option>
-						<option value="unread">Unread</option>
-					</select>	
-					<i class="fa fa-angle-down prm-color"></i>
-				</div>
-			</nav>
-			<ul class="personas-list">
-				<li class="persona">
-					<h3>John Doe</h3>
-					<p>John@doe.com</p>
-				</li>
-			</ul>
-		</section>
-		<section class="persona-chat">
-			<header class="bg-prm-color--dark white">
-				<div class="persona-title">
-					<h1>John Doe</h1>
-					<p>john@doe.com</p>
-				</div>
-			</header>
-			<div class="chat">
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-				<div class="message"><p>Hello there i would like to speak to your master</p><span class="livestamp">2 mins ago</span></div>
-			</div>
-			<footer class="chat-actions">
-				<form action="#">
-					<input type="text" placeholder="Type a message here">
-				</form>
-			</footer>
-		</section>
-	</section>	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<section class="main-container" ng-view>
+	</section>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+		<script src="js/vendor/angular-route.min.js"></script>
+		<script src="js/app/index.js"></script>
   </body>
 </html>

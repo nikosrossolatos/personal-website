@@ -1,0 +1,38 @@
+
+<section class="personas">
+	<nav class="clearfix">
+		<p>33 chats</p>
+		<div class="filter">
+			<select name="filter" class="prm-color">
+				<option value="online">Online</option>
+				<option value="unread">Unread</option>
+			</select>	
+			<i class="fa fa-angle-down prm-color"></i>
+		</div>
+	</nav>
+	<ul class="personas-list">
+		<li class="persona" ng-repeat="persona in personas">
+			<h3>{{persona.name || 'undefined'}}</h3>
+			<p>{{persona.email}}</p>
+		</li>
+	</ul>
+</section>
+<section class="persona-chat">
+	<header class="bg-prm-color--dark white">
+		<div class="persona-title">
+			<h1>John Doe</h1>
+			<p>john@doe.com</p>
+		</div>
+	</header>
+	<div class="chat">
+		<div class="message" ng-repeat="message in messages">
+			<p>{{message.content}}</p>
+			<span class="livestamp">{{message.date_sent | date}}</span>
+		</div>
+	</div>
+	<footer class="chat-actions">
+		<form action="#">
+			<input type="text" placeholder="Type a message here">
+		</form>
+	</footer>
+</section>
