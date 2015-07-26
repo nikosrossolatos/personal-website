@@ -59,6 +59,8 @@
 	background-color: rgba(240,240,240,.85);
 	font-size:16px;
 	color:#656565;
+	overflow:hidden;
+	position:relative;
 }
 .personas nav{
 	background-color: #fff;
@@ -78,6 +80,13 @@
 .personas .filter select{
 	border:none;
 	font-size:16px;
+}
+.personas-list {
+	position:absolute;
+	left:0;
+	right:0;
+	bottom:0;
+	top:51px;
 }
 .personas-list li{
 	border-bottom:1px solid #ccc;
