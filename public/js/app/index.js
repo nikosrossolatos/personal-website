@@ -39,60 +39,6 @@
 			});
 		};
 		$scope.skata = 'ante gamisou'
-		$scope.messages = [{
-			content:'Hello there i would like to speak to your master',
-			date_sent :Date.now(),
-			admin:true
-		},
-		{
-			content:'Hello there i would like to speak to your master',
-			date_sent :Date.now(),
-			admin:true
-		},
-		{
-			content:'Hello there i would like to speak to your master',
-			date_sent :Date.now(),
-			admin:true
-		},
-		{
-			content:'Hello there i would like to speak to your master',
-			date_sent :Date.now(),
-			admin:true
-		},
-		{
-			content:'Hello there i would like to speak to your master',
-			date_sent :Date.now(),
-			admin:true
-		},
-		{
-			content:'Hello there i would like to speak to your master',
-			date_sent :Date.now(),
-			admin:true
-		},
-		{
-			content:'Hello there i would like to speak to your master',
-			date_sent :Date.now(),
-			admin:true
-		},
-		{
-			content:'Hello there i would like to speak to your master',
-			date_sent :Date.now(),
-			admin:true
-		},
-		{
-			content:'Hello there i would like to speak to your master',
-			date_sent :Date.now(),
-			admin:true
-		},
-		{
-			content:'Hello there i would like to speak to your master',
-			date_sent :Date.now(),
-			admin:true
-		},
-		{
-			content:'Hello there i would like to speak to your master',
-			date_sent :Date.now(),
-			admin:true
-		}]
+		$scope.messages = [];
 	}]);
 })();
