@@ -1,5 +1,5 @@
 (function(){
-	var app = angular.module('mySite',['ngRoute'])
+	var app = angular.module('mySite',['ngRoute','angularMoment'])
 	.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/',{
 			templateUrl:'/js/templates/index.html',

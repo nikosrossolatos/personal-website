@@ -95,22 +95,29 @@ Skull.prototype.destroy = function(){
 	removeChildren(this.parent);
 }
 
+Skull.prototype.say = function(text){
+	var delay = 1400;
+	this.speak(delay);
+	this.message.textContent = '';
+	//TODO: needs fix Just in case the function hasn't stopped before next response
+	this.messageIterator = 0;
+	this.typingEffect(text);
+	previousResponse = text;
+	$.post('/message', {message: text,avatar:true}, function(data, textStatus, xhr) {
+		/*optional stuff to do after success */
+		return true;
+	});
+}
 Skull.prototype.response = function (text,reply) {
 	var response = text || getAnswer(reply);
 	var that = this;
-	$.post('/message', {message: reply}, function(data, textStatus, xhr) {
-		var delay = 1400;
-		that.speak(delay);
-		that.message.textContent = '';
-		//TODO: needs fix Just in case the function hasn't stopped before next response
-		that.messageIterator = 0;
-		that.typingEffect(response);
-		previousResponse = response;
-		$.post('/message', {message: response,avatar:true}, function(data, textStatus, xhr) {
-				/*optional stuff to do after success */
-			});
-		return response;		
-	});
+	if(reply){
+		$.post('/message', {message: reply}, function(data, textStatus, xhr) {		
+		});
+	}
+	var x = this.say(response);
+
+	return response;
 }
 Skull.prototype.speak = function(delay){
 	var that = this;

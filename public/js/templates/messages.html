@@ -12,7 +12,7 @@
 	</nav>
 	<ul class="personas-list" >
 		<li class="persona" ng-repeat="conversation in conversations" ng-click="loadChat(conversation.persona_id._id)">
-			<h3>{{conversation.persona_id.name || 'undefined'}}</h3>
+			<h3>{{conversation.persona_id.name || 'Anon'}}</h3>
 			<p>{{conversation.persona_id.email}}</p>
 		</li>
 	</ul>
@@ -20,14 +20,14 @@
 <section class="persona-chat">
 	<header class="bg-prm-color--dark white">
 		<div class="persona-title">
-			<h1>John Doe</h1>
-			<p>john@doe.com</p>
+			<h1>{{conversation.persona_id.name || 'Anon'}}</h1>
+			<p>{{conversation.persona_id.email || 'no@email.found'}}</p>
 		</div>
 	</header>
 	<div class="chat">
 		<div class="message" ng-repeat="message in messages">
 			<p>{{message.content}}</p>
-			<span class="livestamp">{{message.date_sent | date}}</span>
+			<span class="livestamp" am-time-ago="message.date_sent"></span>
 		</div>
 	</div>
 	<footer class="chat-actions">
