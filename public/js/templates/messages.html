@@ -1,7 +1,7 @@
 
 <section class="personas">
 	<nav class="clearfix">
-		<p>{{personas.length}}</p>
+		<p>{{personas.length}} chats</p>
 		<div class="filter">
 			<select name="filter" class="prm-color">
 				<option value="online">Online</option>
@@ -10,10 +10,10 @@
 			<i class="fa fa-angle-down prm-color"></i>
 		</div>
 	</nav>
-	<ul class="personas-list">
-		<li class="persona" ng-repeat="persona in personas">
-			<h3>{{persona.name || 'undefined'}}</h3>
-			<p>{{persona.email}}</p>
+	<ul class="personas-list" >
+		<li class="persona" ng-repeat="conversation in conversations" ng-click="loadChat(conversation.persona_id._id)">
+			<h3>{{conversation.persona_id.name || 'undefined'}}</h3>
+			<p>{{conversation.persona_id.email}}</p>
 		</li>
 	</ul>
 </section>

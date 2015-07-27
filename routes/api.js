@@ -6,9 +6,16 @@ var express = require('express');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/personas', function(req, res, next) {
-  personas.find({},function(err,personas){
-  	res.json(personas);
+router.get('/conversations', function(req, res, next) {
+  conversations.find({},'persona_id').populate('persona_id').exec(function(err,conversations){
+  	res.json(conversations);
   })
 });
+
+router.get('/personas/:persona_id/chat', function(req, res, next) {
+  conversations.findOne({persona_id:req.params.persona_id},function(err,chat){
+  	res.json(chat.messages);
+  })
+});
+
 module.exports = router;

@@ -7,7 +7,8 @@
 		})
 		.when('/messages', {
 			templateUrl: '/js/templates/messages.html',
-			controller: 'MessagesController'
+			controller: 'MessagesController',
+			controllerAs:'msg'
 		})
 		.when('/settings',{
 			templateUrl: 'js/templates/settings.html',
@@ -28,9 +29,16 @@
 		//do something
 	})
 	.controller('MessagesController',['$scope','$http',function($scope,$http){
-		$http.get('/api/personas').success(function(data){
-			$scope.personas = data;
+		$http.get('/api/conversations').success(function(data){
+			$scope.conversations = data;
 		});
+
+		$scope.loadChat = function(persona_id){
+			$http.get('/api/personas/'+persona_id+'/chat').success(function(data){
+				$scope.messages = data;
+			});
+		};
+		$scope.skata = 'ante gamisou'
 		$scope.messages = [{
 			content:'Hello there i would like to speak to your master',
 			date_sent :Date.now(),
