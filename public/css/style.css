@@ -58,6 +58,9 @@ h3{
 p{
 	margin: 0;
 }
+a{
+	text-decoration: none;
+}
 object{
 	display:block;
 }
@@ -237,6 +240,7 @@ select::-ms-expand {
 .input-sub{
 	position:absolute;
 	right:0;
+	bottom:-30px;
 	font-size:14px;
 	font-weight:300;
 }

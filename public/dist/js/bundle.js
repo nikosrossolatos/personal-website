@@ -130,12 +130,15 @@ Skull.prototype.response = function (text,reply) {
 	var response = text || getAnswer(reply);
 	var that = this;
 	if(reply){
-		$.post('/message', {message: reply}, function(data, textStatus, xhr) {		
+		$.post('/message', {message: reply}, function(data, textStatus, xhr) {
+			var x = that.say(response);
+			return response;
 		});
 	}
-	var x = this.say(response);
-
-	return response;
+	else{
+		var x = this.say(response);
+		return response;
+	}
 }
 Skull.prototype.speak = function(delay){
 	var that = this;

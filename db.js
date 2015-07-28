@@ -6,7 +6,7 @@ var personas = new Schema({
 	surname 		: String,
 	fullname 		: String,
 	email  			: String,
-	last_active : Date,
+	last_active : Date
 })
 
 var admin = new Schema ({
@@ -21,7 +21,8 @@ var conversations = new Schema({
 		date_sent : Date,
 		content 	: String,
 		admin 		: Boolean 
-	}]
+	}],
+	last_active: Date
 })
 
 

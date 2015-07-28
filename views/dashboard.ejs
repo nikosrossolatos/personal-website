@@ -13,7 +13,7 @@
 		</div>
 		<div class="search">
 			<i class="fa fa-search"></i>
-			<input class="not-transparent" type="text" name="search" value="" placeholder="Search">
+			<input class="ph-not-transparent" type="text" name="search" value="" placeholder="Search">
 		</div>
 	</header>
 	<section class="fullscreen bg-image"></section>
@@ -27,11 +27,21 @@
 	</section>
 	<section class="main-container" ng-view>
 	</section>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-		<script src="js/vendor/angular-route.min.js"></script>
-		<script src="js/app/index.js"></script>
 
-		<script src="js/vendor/moment.min.js"></script>
-		<script src="js/vendor/angular-moment.js"></script>
+		<!-- js libraries -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+		<script src="/js/vendor/angular-route.min.js"></script>
+		<script src="/js/vendor/surge-client.min.js"></script>
+		<script src="/js/vendor/moment.min.js"></script>
+		<script src="/js/prototypes.js"></script>
+		
+		<!-- app.js -->
+		<script src="/js/app/index.js"></script>
+
+		<!-- directives -->
+		<script src="/js/vendor/angular-moment.js"></script>
+		<script src="https://cdn.rawgit.com/Luegg/angularjs-scroll-glue/master/src/scrollglue.js"></script>
+    
+		
   </body>
 </html>

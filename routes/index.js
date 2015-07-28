@@ -5,6 +5,12 @@ var mongoose = require( 'mongoose' );
 var personas = mongoose.model( 'personas', personas );
 var conversations = mongoose.model( 'conversations', conversations );
 
+var Surge = require('../surge-client.js');
+
+var surge = new Surge();
+
+surge.subscribe('dashboard');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -32,11 +38,12 @@ router.post('/message',function(req,res){
 		}
 
 		conversation.messages.push(messageObj);
-
+		conversation.last_active = Date.now();
 		conversation.save(function(err){
 			if(err){
 				return;
 			}
+			surge.emit('dashboard','update conversation',conversation);
 			res.json({status:'ok'});
 		})
 	});
@@ -54,10 +61,12 @@ router.get('/personas',function(req,res){
 
 router.put('/personas',function(req,res){
 	var persona = req.cookies.persona;
-	personas.findOneAndUpdate({_id:persona},{$set:{name:req.body.name}},function(err){
+	var name = req.body.name;
+	personas.findOneAndUpdate({_id:persona},{$set:{name:name}},function(err){
 		if(err){
 			return;
 		}
+		surge.emit('dashboard','update name',{persona:persona,name:name});
 		res.json({status:'ok'})
 	})
 });

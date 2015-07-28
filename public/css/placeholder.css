@@ -1,15 +1,15 @@
-.not-transparent::-webkit-input-placeholder {
+.ph-not-transparent::-webkit-input-placeholder {
 	opacity:1;
 }
 
-.not-transparent:-moz-placeholder { /* Firefox 18- */
+.ph-not-transparent:-moz-placeholder { /* Firefox 18- */
 	opacity:1;  
 }
 
-.not-transparent::-moz-placeholder {  /* Firefox 19+ */
+.ph-not-transparent::-moz-placeholder {  /* Firefox 19+ */
 	opacity:1;  
 }
 
-.not-transparent:-ms-input-placeholder {  
+.ph-not-transparent:-ms-input-placeholder {  
 	opacity:1;  
 }

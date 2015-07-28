@@ -87,6 +87,7 @@
 	right:0;
 	bottom:0;
 	top:51px;
+	overflow:auto;
 }
 .personas-list li{
 	border-bottom:1px solid #ccc;
