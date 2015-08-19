@@ -18,7 +18,6 @@ function Skull(el){
 	this.responsesArray = responsesArray;
 	this.parent = el;
 	this.messageIterator = 0;
-	this.autopilot = true;
 	this._generateAvatar();
 	this.render();
 }
@@ -82,10 +81,10 @@ Skull.prototype.render = function(){
 		/*optional stuff to do after success */
 		visitorName = data.name;
 		if(!visitorName){
-			that.say('Hello stranger !');
+			that.response('Hello stranger !');
 		}
 		else{
-			that.say('Hello '+visitorName+' !');
+			that.response('Hello '+visitorName+' !');
 		}
 	});
 	
@@ -123,9 +122,6 @@ Skull.prototype.speak = function(delay){
 	setTimeout(function(){
 		that.mouth.className = 'skull-mouth'
 	}, delay)
-}
-Skull.prototype.changeAutopilot = function(exp){
-	this.autopilot = exp;
 }
 Element.prototype.remove = function() {
     this.parentElement.removeChild(this);
