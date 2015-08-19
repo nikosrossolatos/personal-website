@@ -15,6 +15,18 @@
 			<i class="fa fa-search"></i>
 			<input class="ph-not-transparent" type="text" name="search" value="" placeholder="Search">
 		</div>
+		<div class="actions" ng-controller="ActionsController">
+			Autopilot
+			<div class="tgl">
+				<div class="onoffswitch">
+					<input type="checkbox" id="autopilot" class="onoffswitch-checkbox" name="onoffswitch" ng-checked="autopilot" ng-click="changeAutopilot()">
+					<label for="autopilot" class="onoffswitch-label">
+						<span class="onoffswitch-inner"></span>
+						<span class="onoffswitch-switch"></span>
+					</label>
+				</div>
+			</div>
+		</div>
 	</header>
 	<section class="fullscreen bg-image"></section>
 	<section class="side-menu">

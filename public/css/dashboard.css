@@ -1,4 +1,5 @@
 @import	'placeholder.css';
+@import 'toggle.css';
 
 .header{
 	background-color: #d72327;
@@ -22,6 +23,11 @@
 	color:#fff;
 	font-size:16px;
 	min-width:200px;
+}
+.actions{
+	display:inline-block;
+	width:80%;
+	text-align: right;
 }
 .main-container{
 	position:absolute;

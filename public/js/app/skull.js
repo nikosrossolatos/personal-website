@@ -18,6 +18,7 @@ function Skull(el){
 	this.responsesArray = responsesArray;
 	this.parent = el;
 	this.messageIterator = 0;
+	this.autopilot = true;
 	this._generateAvatar();
 	this.render();
 }
@@ -28,10 +29,9 @@ Skull.prototype._generateAvatar = function(){
 	});
 
 	this.head = Element({
-		tag:'object',
-		type:'image/svg+xml',
+		tag:'img',
 		class:'skull-upperhead',
-		data:'/img/skull.svg'
+		src:'/img/skull.svg'
 	});
 
 	this.headFallback = Element({
@@ -41,11 +41,10 @@ Skull.prototype._generateAvatar = function(){
 	});
 
 	this.mouth = Element({
-		tag:'object',
-		type:'image/svg+xml',
+		tag:'img',
 		class:'skull-mouth',
 		id:'skull-mouth',
-		data:'/img/skull-mouth.svg'
+		src:'/img/skull-mouth.svg'
 	});
 	this.mouthFallback = Element({
 		tag:'img',
@@ -83,10 +82,10 @@ Skull.prototype.render = function(){
 		/*optional stuff to do after success */
 		visitorName = data.name;
 		if(!visitorName){
-			that.response('Hello stranger !');
+			that.say('Hello stranger !');
 		}
 		else{
-			that.response('Hello '+visitorName+' !');
+			that.say('Hello '+visitorName+' !');
 		}
 	});
 	
@@ -110,17 +109,8 @@ Skull.prototype.say = function(text){
 }
 Skull.prototype.response = function (text,reply) {
 	var response = text || getAnswer(reply);
-	var that = this;
-	if(reply){
-		$.post('/message', {message: reply}, function(data, textStatus, xhr) {
-			var x = that.say(response);
-			return response;
-		});
-	}
-	else{
-		var x = this.say(response);
-		return response;
-	}
+	var x = this.say(response);
+	return response;
 }
 Skull.prototype.speak = function(delay){
 	var that = this;
@@ -129,7 +119,9 @@ Skull.prototype.speak = function(delay){
 		that.mouth.className = 'skull-mouth'
 	}, delay)
 }
-
+Skull.prototype.changeAutopilot = function(exp){
+	this.autopilot = exp;
+}
 Element.prototype.remove = function() {
     this.parentElement.removeChild(this);
 }

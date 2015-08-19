@@ -27,7 +27,7 @@
   -webkit-animation: speak .7s infinite; /* Safari 4+ */
   -moz-animation:    speak .7s infinite; /* Fx 5+ */
   -o-animation:      speak .7s infinite; /* Opera 12+ */
-  animation:         speak .7s infinite; /* IE 10+, Fx 29+ */
+  animation:         speak .7s 2; /* IE 10+, Fx 29+ */
 }
 @-webkit-keyframes speak {
 	0%,100%   {
@@ -71,5 +71,20 @@
 	}
 	50% {
 		transform: translate3d(5px,5px,0);
+	}
+}
+
+@media only screen and (max-width:480px){
+	.skull-head object{
+		width:43px;
+	}
+	.skull-message h1{
+		font-size:24px;
+	}
+	.input-label-content{
+		font-size:16px;
+	}
+	.input-field{
+		font-size:16px;
 	}
 }

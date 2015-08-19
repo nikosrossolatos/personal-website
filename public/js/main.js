@@ -1,14 +1,23 @@
 var Skull = require('skull');
+var Surge = require('surge');
+
 (function() {
 	// page initialization
 	var skullContainer = document.getElementById('skull');
- 	var avatar = new Skull(skullContainer);
-   	
+ 	window.avatar = new Skull(skullContainer);
+
+  var surge = new Surge({debug:true});
+
+  surge.subscribe('test');
+  surge.on('response',function(data){
+  	avatar.say(data.response);
+  });
+
 	var inputEl = document.getElementById('input-1');
 	var form = document.getElementById('typing-form');
 	var contactButton = document.getElementById('contact');
 	var linkedinButton = document.getElementById('linkedin');
-	var facebookButton = document.getElementById('facebook');
+	var behanceButton = document.getElementById('behance');
 
 	contactButton.addEventListener('click',function(){
 		avatar.response('My master\'s email is nickrossolatos@gmail.com !');
@@ -16,8 +25,8 @@ var Skull = require('skull');
 	linkedinButton.addEventListener('click',function(){
 		avatar.response('Go to https://gr.linkedin.com/in/nikosrossolatos');
 	});
-	facebookButton.addEventListener('click',function(){
-		avatar.response('Oh no no. Facebook is private. Unless you are a girl ;) ');
+	behanceButton.addEventListener('click',function(){
+		avatar.response('Go to http://behance.com/nickrossolatos ');
 	});
 
 	//TODO: need to replace Jquery Ajax 
@@ -25,7 +34,15 @@ var Skull = require('skull');
 		ev.preventDefault();
 		var reply = inputEl.value;
 		inputEl.value = ''
-		var avatarReply = avatar.response(false,reply);
+		$.post('/message', {message: reply}, function(data, textStatus, xhr) {
+			if(data.response){
+				avatar.response(false,reply);
+			}
+			else{
+				avatar.message.textContent='';
+				avatar.typingEffect('...');
+			}
+		});
 	}, false);
 	
 	inputEl.addEventListener( 'focus', onInputFocus );

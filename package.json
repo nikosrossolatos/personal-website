@@ -29,6 +29,7 @@
   },
   "browser": {
     "element": "./public/js/app/element.js",
-    "skull": "./public/js/app/skull.js"
+    "skull": "./public/js/app/skull.js",
+    "surge": "./public/js/vendor/surge-client.js"
   }
 }

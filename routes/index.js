@@ -4,6 +4,7 @@ var router = express.Router();
 var mongoose = require( 'mongoose' );
 var personas = mongoose.model( 'personas', personas );
 var conversations = mongoose.model( 'conversations', conversations );
+var settings = mongoose.model( 'settings', settings );
 
 var Surge = require('../surge-client.js');
 
@@ -44,7 +45,14 @@ router.post('/message',function(req,res){
 				return;
 			}
 			surge.emit('dashboard','update conversation',conversation);
-			res.json({status:'ok'});
+			settings.findOne({},function(err,settings){
+				if(settings.autopilot){
+					res.json({response:true});
+				}
+				else{
+					res.json({status:'ok'});
+				}
+			})
 		})
 	});
 });

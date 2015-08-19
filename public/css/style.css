@@ -104,8 +104,9 @@ select::-ms-expand {
 	padding:15px;
 	vertical-align: middle;
 }
-.brand object{
+.brand img{
 	width:73px;
+	height:73px;
 }
 .name{
 	display:table-cell;
@@ -248,3 +249,38 @@ select::-ms-expand {
 	from { width: 0; } 
 } 
 @keyframes blink-caret { 50% { border-color: transparent; } }
+
+
+@media only screen and (max-width:480px){
+	body{
+		line-height:18px;
+	}
+	h1{
+		font-size:18px;
+	}
+	.brand img{
+		width:43px;
+		height:43px;
+	}
+	.name{
+		padding-left: 0;
+	}
+	.nav-menu a{
+		font-size:18px;
+	}
+	.chat-input{
+		padding:1em;
+	}
+	.skull-upperhead,.skull-mouth{
+		width:43px;
+	}
+	.skull-upperhead{
+		height:43px;
+	}
+	.skull-mouth{
+		height:10px;
+	}
+	.skull-upperhead img,.skull-mouth img{
+		display:inline-block;
+	}
+}

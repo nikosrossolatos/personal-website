@@ -19,8 +19,18 @@
 		})
 		.otherwise({redirectTo:'/'})
 	}])
+	.controller('ActionsController',function($scope,$http){
+		$http.get('/api/settings').success(function(data){
+			$scope.autopilot = data.autopilot;
+		});
+		$scope.changeAutopilot = function(){
+			$scope.autopilot = !$scope.autopilot;
+			$http.put('/api/settings',{autopilot:$scope.autopilot}).success(function(data){
+			});
+		}
+	})
+	.controller('MainController',function($scope,$location,$http){
 
-	.controller('MainController',function($scope,$location){
 		$scope.isActive = function (viewLocation) {
         return viewLocation === $location.path();
     };
@@ -72,10 +82,13 @@
 			//findByPersona_id
 			var index = $scope.conversations.findPersonaBy('_id',persona_id);
 			$scope.chat = $scope.conversations[index];
-			// $http.get('/api/personas/'+persona_id+'/chat').success(function(data){
-			// 	$scope.chat = data;
-			// });
 		};
+		$scope.sendMessage = function(){
+			var persona_id = $scope.chat.persona_id._id;
+			var response = $scope.response;
+			surge.emit('test','response',{response:response});
+			$scope.response = '';
+		}
 		$scope.chat = {};
 	}]);
 })();

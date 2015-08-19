@@ -25,9 +25,14 @@ var conversations = new Schema({
 	last_active: Date
 })
 
+var settings = new Schema({
+	autopilot : Boolean
+});
 
 mongoose.model( 'personas', personas );
 mongoose.model( 'admin', admin );
 mongoose.model( 'conversations', conversations );
+
+mongoose.model( 'settings', settings );
 
 mongoose.connect( 'mongodb://localhost/turing' );
