@@ -5695,8 +5695,17 @@ Skull.prototype.say = function(text){
 }
 Skull.prototype.response = function (text,reply) {
 	var response = text || getAnswer(reply);
-	var x = this.say(response);
-	return response;
+	var that = this;
+	if(reply){
+		$.post('/message', {message: reply}, function(data, textStatus, xhr) {
+			var x = that.say(response);
+			return response;
+		});
+	}
+	else{
+		var x = this.say(response);
+		return response;
+	}
 }
 Skull.prototype.speak = function(delay){
 	var that = this;
