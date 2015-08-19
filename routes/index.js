@@ -14,18 +14,57 @@ surge.subscribe('dashboard');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { channel: req.cookies.persona });
 });
 
 router.post('/message',function(req,res){
 	var persona = req.cookies.persona;
 	var message = req.body.message;
 	var avatar = req.body.avatar || false;
-	var admin = req.body.admin || false;
 	var messageObj = {
 		date_sent : Date.now(),
 		content  	: message,
-		admin  		: avatar || admin
+		admin  		: avatar
+	};
+	conversations.findOne({persona_id:persona},function(err,conversation){
+		if(err){
+			return;
+		}
+
+		if(!conversation){
+			conversation = new conversations({
+				persona_id : persona,
+				messages : []
+			});
+		}
+
+		conversation.messages.push(messageObj);
+		conversation.last_active = Date.now();
+		conversation.save(function(err){
+			if(err){
+				return;
+			}
+			surge.emit('dashboard','update conversation',conversation);
+			settings.findOne({},function(err,settings){
+				if(settings.autopilot){
+					res.json({response:true});
+				}
+				else{
+					res.json({status:'ok'});
+				}
+			})
+		})
+	});
+});
+
+router.post('/response',function(req,res){
+	var persona = req.body.persona;
+	var message = req.body.message;
+	var admin = true
+	var messageObj = {
+		date_sent : Date.now(),
+		content  	: message,
+		admin  		: admin
 	};
 	conversations.findOne({persona_id:persona},function(err,conversation){
 		if(err){
@@ -47,16 +86,9 @@ router.post('/message',function(req,res){
 			}
 			surge.emit('dashboard','update conversation',conversation);
 			if(admin){
-				surge.emit('test','response',{response:message});
+				surge.emit(persona,'response',{response:message});
 			}
-			settings.findOne({},function(err,settings){
-				if(settings.autopilot){
-					res.json({response:true});
-				}
-				else{
-					res.json({status:'ok'});
-				}
-			})
+			res.end();
 		})
 	});
 });

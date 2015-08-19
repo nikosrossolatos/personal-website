@@ -86,7 +86,7 @@
 		$scope.sendMessage = function(){
 			var persona_id = $scope.chat.persona_id._id;
 			var response = $scope.response;
-			$http.post('/message',{message:response,admin:true});
+			$http.post('/response',{message:response,admin:true,persona:persona_id});
 			$scope.response = '';
 		}
 		$scope.chat = {};

@@ -5789,7 +5789,6 @@ var Surge = require('surge');
 
   var surge = new Surge({debug:true});
 
-  surge.subscribe('test');
   surge.on('response',function(data){
   	avatar.say(data.response);
   });
@@ -5810,6 +5809,7 @@ var Surge = require('surge');
 		avatar.response('Go to http://behance.com/nickrossolatos ');
 	});
 
+	surge.subscribe(form.dataset.channel);
 	//TODO: need to replace Jquery Ajax 
 	form.addEventListener("submit", function(ev){
 		ev.preventDefault();
