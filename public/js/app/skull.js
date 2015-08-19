@@ -107,7 +107,7 @@ Skull.prototype.response = function (text,reply) {
 	var response = text || getAnswer(reply);
 	var that = this;
 	if(reply){
-		$.post('/message', {message: reply}, function(data, textStatus, xhr) {
+		$.post('/message', {message: response}, function(data, textStatus, xhr) {
 			var x = that.say(response);
 			return response;
 		});
