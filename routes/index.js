@@ -21,10 +21,11 @@ router.post('/message',function(req,res){
 	var persona = req.cookies.persona;
 	var message = req.body.message;
 	var avatar = req.body.avatar || false;
+	var admin = req.body.admin || false;
 	var messageObj = {
 		date_sent : Date.now(),
 		content  	: message,
-		admin  		: avatar
+		admin  		: avatar || admin
 	};
 	conversations.findOne({persona_id:persona},function(err,conversation){
 		if(err){
@@ -45,6 +46,9 @@ router.post('/message',function(req,res){
 				return;
 			}
 			surge.emit('dashboard','update conversation',conversation);
+			if(admin){
+				surge.emit('test','response',{response:message});
+			}
 			settings.findOne({},function(err,settings){
 				if(settings.autopilot){
 					res.json({response:true});

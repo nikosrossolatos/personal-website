@@ -39,8 +39,7 @@ var Surge = require('surge');
 				avatar.response(false,reply);
 			}
 			else{
-				avatar.message.textContent='';
-				avatar.typingEffect('...');
+				avatar.say('...');
 			}
 		});
 	}, false);

@@ -5692,10 +5692,6 @@ Skull.prototype.say = function(text){
 	this.messageIterator = 0;
 	this.typingEffect(text);
 	previousResponse = text;
-	$.post('/message', {message: text,avatar:true}, function(data, textStatus, xhr) {
-		/*optional stuff to do after success */
-		return true;
-	});
 }
 Skull.prototype.response = function (text,reply) {
 	var response = text || getAnswer(reply);
@@ -5729,7 +5725,6 @@ Skull.prototype.typingEffect = function(text){
 		this.messageIterator = 0;
 	}
 }
-
 function getRandomAnswer(array){
 	return array[Math.floor(Math.random() * array.length)];
 }
@@ -5825,8 +5820,7 @@ var Surge = require('surge');
 				avatar.response(false,reply);
 			}
 			else{
-				avatar.message.textContent='';
-				avatar.typingEffect('...');
+				avatar.say('...');
 			}
 		});
 	}, false);

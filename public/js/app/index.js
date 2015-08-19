@@ -86,7 +86,7 @@
 		$scope.sendMessage = function(){
 			var persona_id = $scope.chat.persona_id._id;
 			var response = $scope.response;
-			surge.emit('test','response',{response:response});
+			$http.post('/message',{message:response,admin:true});
 			$scope.response = '';
 		}
 		$scope.chat = {};
