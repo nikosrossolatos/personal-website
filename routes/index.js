@@ -39,6 +39,7 @@ router.post('/message',function(req,res){
 		}
 
 		conversation.messages.push(messageObj);
+		conversation.unread = true;
 		conversation.last_active = Date.now();
 		conversation.save(function(err){
 			if(err){

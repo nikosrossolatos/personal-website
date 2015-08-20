@@ -43,6 +43,7 @@
 	})
 	.controller('MessagesController',['$scope','$http',function($scope,$http){
 
+		$scope.sortBy = 'unread';
 		surge.on('update conversation',function(data){
 			$scope.$apply(function() {
 				var index = $scope.conversations.findIndexBy('_id',data._id);
@@ -75,6 +76,7 @@
 
 		$http.get('/api/conversations').success(function(data){
 			$scope.conversations = data;
+			$scope.chat = $scope.conversations[0];
 		});
 
 		$scope.loadChat = function(persona_id){
