@@ -61,7 +61,7 @@ router.post('/message',function(req,res){
 router.post('/response',function(req,res){
 	var persona = req.body.persona;
 	var message = req.body.message;
-	var admin = true
+	var admin = true;
 	var messageObj = {
 		date_sent : Date.now(),
 		content  	: message,

@@ -5695,7 +5695,7 @@ Skull.prototype.say = function(text){
 Skull.prototype.response = function (text,reply) {
 	var response = text || getAnswer(reply);
 	var that = this;
-	$.post('/message', {message: response}, function(data, textStatus, xhr) {
+	$.post('/message', {message: response,avatar:true}, function(data, textStatus, xhr) {
 		var x = that.say(response);
 		return response;
 	});

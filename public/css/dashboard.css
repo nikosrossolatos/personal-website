@@ -144,7 +144,7 @@
 	padding:2em;
 	border-bottom:1px solid #f0f0f0;
 }
-.message:nth-child(2n){
+.message.user{
 	background-color: #ffeeee;
 }
 .message span{
