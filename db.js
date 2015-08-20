@@ -22,7 +22,8 @@ var conversations = new Schema({
 		content 	: String,
 		admin 		: Boolean 
 	}],
-	last_active: Date
+	last_active: Date,
+	unread : {type: Boolean, default: true}
 })
 
 var settings = new Schema({

@@ -92,12 +92,16 @@
 	left:0;
 	right:0;
 	bottom:0;
-	top:51px;
+	top:55px;
 	overflow:auto;
 }
 .personas-list li{
 	border-bottom:1px solid #ccc;
 	padding:1em;
+	color:#a5a5a5;
+}
+.personas-list .unread{
+	color:#656565;
 }
 .persona-chat{
 	background-color: #fff;

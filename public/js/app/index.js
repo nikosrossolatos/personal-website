@@ -82,6 +82,8 @@
 			//findByPersona_id
 			var index = $scope.conversations.findPersonaBy('_id',persona_id);
 			$scope.chat = $scope.conversations[index];
+			$http.put('/api/conversations/'+$scope.chat._id,{unread:false});
+			$scope.conversations[index].unread = false;
 		};
 		$scope.sendMessage = function(){
 			var persona_id = $scope.chat.persona_id._id;

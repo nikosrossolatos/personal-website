@@ -12,7 +12,14 @@ router.get('/conversations', function(req, res, next) {
   	res.json(conversations);
   })
 });
-
+router.put('/conversations/:conversation_id', function(req, res, next) {
+  conversations.findOneAndUpdate({_id:req.params.conversation_id},{$set:{unread:req.body.unread}}).exec(function(err,conversation){
+    if(err){
+      res.json({status:'error'});
+    }
+    res.json({status:'ok'});
+  })
+});
 router.get('/settings', function(req, res, next) {
   settings.findOne({},function(err,settings){
   	res.json(settings);
