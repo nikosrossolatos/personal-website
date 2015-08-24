@@ -20,7 +20,7 @@ I will be adding more features when i have the time and expand the prototype wit
 * Algorithm for the skull-servant responses
 
 ####Modular library
-I will trying to build a modular library for the avatar and messaging systems,
+I will be trying to build a modular library for the avatar and messaging systems,
 so that anyone will be able to use it. Got any advices? Feel free to send me an email!
 
 ####Contributions
