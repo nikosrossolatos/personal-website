@@ -1,6 +1,6 @@
 (function(){
 
-	window.surge = new Surge();
+	window.surge = new Surge({host:'http://159.8.152.168:8080'});
 	surge.subscribe('dashboard');
 	var app = angular.module('mySite',['ngRoute','angularMoment','luegg.directives'])
 	.config(['$routeProvider', function($routeProvider) {

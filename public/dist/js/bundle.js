@@ -5786,7 +5786,7 @@ var Surge = require('surge');
 	var skullContainer = document.getElementById('skull');
  	window.avatar = new Skull(skullContainer);
 
-  var surge = new Surge({debug:true});
+  var surge = new Surge({host:'http://159.8.152.168:8080',debug:true});
 
   surge.on('response',function(data){
   	avatar.say(data.response);
