@@ -8,7 +8,7 @@ var settings = mongoose.model( 'settings', settings );
 
 var Surge = require('../surge-client.js');
 
-var surge = new Surge();
+var surge = new Surge({host:'http://159.8.152.168:8080'});
 
 surge.subscribe('dashboard');
 
