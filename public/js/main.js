@@ -14,19 +14,6 @@ var Surge = require('surge');
 
 	var inputEl = document.getElementById('input-1');
 	var form = document.getElementById('typing-form');
-	var contactButton = document.getElementById('contact');
-	var linkedinButton = document.getElementById('linkedin');
-	var behanceButton = document.getElementById('behance');
-
-	contactButton.addEventListener('click',function(){
-		avatar.response('My master\'s email is nickrossolatos@gmail.com !');
-	});
-	linkedinButton.addEventListener('click',function(){
-		avatar.response('Go to https://gr.linkedin.com/in/nikosrossolatos');
-	});
-	behanceButton.addEventListener('click',function(){
-		avatar.response('Go to http://behance.com/nickrossolatos ');
-	});
 
 	surge.subscribe(form.dataset.channel);
 	//TODO: need to replace Jquery Ajax 
