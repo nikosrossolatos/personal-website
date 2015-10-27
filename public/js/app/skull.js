@@ -149,6 +149,12 @@ function getAnswer(reply){
 		}
 		return 'What is your name lad?'
 	}
+	else if(reply.indexOf('cv')>=0){
+		return 'One CV coming right away!';
+	}
+	else if(reply.indexOf('money')>=0){
+		return 'Is there any gold involved?';
+	}
 	else if(previousResponse=='What is your name lad?'){
 		if(reply.split(' ').length===1){
 			visitorName = reply.capitalizeFirstLetter();

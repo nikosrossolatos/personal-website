@@ -23,6 +23,11 @@ var Surge = require('surge');
 		inputEl.value = ''
 		$.post('/message', {message: reply}, function(data, textStatus, xhr) {
 			if(data.response){
+				if(reply.indexOf('cv')>=0){
+					setTimeout(function(){
+						window.location = "http://www.nickrossolatos.me/cv/mycv.pdf";
+					},100);
+				}
 				avatar.response(false,reply);
 			}
 			else{
