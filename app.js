@@ -42,16 +42,13 @@ app.use(passport.session());
 
 //initialize surge
 app.use(function(req,res, next) {
-  res.locals.surge = new Surge();
+  res.locals.surge = new Surge({debug:true});
   res.locals.surge.subscribe('dashboard');
   next();
 });
 
 app.use('/', cookies.check,routes);
-app.use('/admin', function(req,res){
-  console.log("in here");
-  res.sendFile(path.join(__dirname + '/public/app/index.html'));
-});
+app.use('/admin', users);
 app.use('/api', api);
 app.use('/auth', auth);
 

@@ -4,8 +4,6 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  // res.render('dashboard');
-  console.log(__dirname)
-  res.sendFile(path.join(__dirname + '/public/app/index.html'));
+  res.render('dashboard');
 });
 module.exports = router;
