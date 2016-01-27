@@ -1,12 +1,12 @@
 var Skull = require('skull');
-var Surge = require('surge');
+var Surge = require('surgejs-client');
 
 (function() {
 	// page initialization
 	var skullContainer = document.getElementById('skull');
  	window.avatar = new Skull(skullContainer);
 
-  var surge = new Surge({host:'http://159.8.152.168:8080',debug:true});
+  var surge = new Surge();
 
   surge.on('response',function(data){
   	avatar.say(data.response);
@@ -23,9 +23,9 @@ var Surge = require('surge');
 		inputEl.value = ''
 		$.post('/message', {message: reply}, function(data, textStatus, xhr) {
 			if(data.response){
-				if(reply.indexOf('cv')>=0){
+				if(reply.indexOf('cv')>=0 || reply.indexOf('resume')>=0){
 					setTimeout(function(){
-						window.location = "http://www.nickrossolatos.me/cv/mycv.pdf";
+						window.location = "http://www.nickrossolatos.me/cv/nickrossolatos.pdf";
 					},100);
 				}
 				avatar.response(false,reply);

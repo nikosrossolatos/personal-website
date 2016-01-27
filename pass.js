@@ -3,11 +3,11 @@ var key       = 'secret';
 var algorithm = 'sha1';
 var hash, hmac;
 var mongoose = require( 'mongoose' );
-var admin = mongoose.model( 'admin', admin );
+var admins = mongoose.model( 'admins', admins );
 
 module.exports = function(passport, LocalStrategy){
   function findById(id, fn) {
-    admin.findOne({ _id : id},function(err,user){
+    admins.findOne({ _id : id},function(err,user){
     	if(err){
     		fn(err);
     	}
@@ -21,7 +21,7 @@ module.exports = function(passport, LocalStrategy){
   }
 
   function findByUsername(username, fn) {
-    admin.findOne({email : username.toLowerCase()},function(err,user){
+    admins.findOne({email : username.toLowerCase()},function(err,user){
       if(err) { return fn(err); }
       if(user){
         return fn(null,user);

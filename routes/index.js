@@ -6,11 +6,6 @@ var personas = mongoose.model( 'personas', personas );
 var conversations = mongoose.model( 'conversations', conversations );
 var settings = mongoose.model( 'settings', settings );
 
-var Surge = require('../surge-client.js');
-
-var surge = new Surge({host:'http://159.8.152.168:8080'});
-
-surge.subscribe('dashboard');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -26,14 +21,14 @@ router.post('/message',function(req,res){
 		content  	: message,
 		admin  		: avatar
 	};
-	conversations.findOne({persona_id:persona},function(err,conversation){
+	conversations.findOne({persona:persona},function(err,conversation){
 		if(err){
 			return;
 		}
 
 		if(!conversation){
 			conversation = new conversations({
-				persona_id : persona,
+				persona : persona,
 				messages : []
 			});
 		}
@@ -45,7 +40,7 @@ router.post('/message',function(req,res){
 			if(err){
 				return;
 			}
-			surge.emit('dashboard','update conversation',conversation);
+			res.locals.surge.emit('dashboard','update conversation',conversation);
 			settings.findOne({},function(err,settings){
 				if(settings.autopilot){
 					res.json({response:true});
@@ -67,14 +62,14 @@ router.post('/response',function(req,res){
 		content  	: message,
 		admin  		: admin
 	};
-	conversations.findOne({persona_id:persona},function(err,conversation){
+	conversations.findOne({persona:persona},function(err,conversation){
 		if(err){
 			return;
 		}
 
 		if(!conversation){
 			conversation = new conversations({
-				persona_id : persona,
+				persona : persona,
 				messages : []
 			});
 		}
@@ -85,9 +80,9 @@ router.post('/response',function(req,res){
 			if(err){
 				return;
 			}
-			surge.emit('dashboard','update conversation',conversation);
+			res.locals.surge.emit('dashboard','update conversation',conversation);
 			if(admin){
-				surge.emit(persona,'response',{response:message});
+				res.locals.surge.emit(persona,'response',{response:message});
 			}
 			res.end();
 		})
@@ -111,7 +106,7 @@ router.put('/personas',function(req,res){
 		if(err){
 			return;
 		}
-		surge.emit('dashboard','update name',{persona:persona,name:name});
+		res.locals.surge.emit('dashboard','update name',{persona:persona,name:name});
 		res.json({status:'ok'})
 	})
 });

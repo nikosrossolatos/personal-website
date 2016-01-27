@@ -9,8 +9,9 @@ exports.check = function(req,res,next){
 	}
 	else{
 		personas.findOne({_id:req.cookies.persona},function(err,persona){
+			console.log(persona);
 			if(!persona){
-				createPersona(function(){
+				createPersona(res,function(){
 					next();
 				})
 			}

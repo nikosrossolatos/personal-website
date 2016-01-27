@@ -2,6 +2,7 @@ var flash = require('connect-flash')
   , express = require('express')
   , passport = require('passport')
   , util = require('util')
+  , cors = require('cors')
   , LocalStrategy = require('passport-local').Strategy;
 
 require('./db.js');
@@ -16,9 +17,12 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var api = require('./routes/api');
+var auth = require('./routes/auth');
+
+var Surge = require('surgejs-client');
 
 var app = express();
-
+app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -36,19 +40,21 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', cookies.check,routes);
-app.use('/admin', users);
-app.use('/api', api);
-
-app.post('/login', 
-  passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),
-  function(req, res) {
-    res.redirect('/');
-  });
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
+//initialize surge
+app.use(function(req,res, next) {
+  res.locals.surge = new Surge();
+  res.locals.surge.subscribe('dashboard');
+  next();
 });
+
+app.use('/', cookies.check,routes);
+app.use('/admin', function(req,res){
+  console.log("in here");
+  res.sendFile(path.join(__dirname + '/public/app/index.html'));
+});
+app.use('/api', api);
+app.use('/auth', auth);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

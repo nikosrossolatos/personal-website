@@ -1,4 +1,5 @@
 var mongoose = require( 'mongoose' );
+var bcrypt = require('bcryptjs');
 var Schema   = mongoose.Schema;
 
 var personas = new Schema({
@@ -9,14 +10,20 @@ var personas = new Schema({
 	last_active : Date
 })
 
-var admin = new Schema ({
+var admins = new Schema ({
 	username : String,
 	password : String,
-})
+});
+
+admins.methods.comparePassword = function(password, done) {
+    bcrypt.compare(password, this.password, function(err, isMatch) {
+        done(err, isMatch);
+    });
+};
 
 /* If admin is true, then the admin said it */
 var conversations = new Schema({
-	persona_id	: {type: Schema.Types.ObjectId, ref: 'personas'},
+	persona	: {type: Schema.Types.ObjectId, ref: 'personas'},
 	messages 		: [{
 		date_sent : Date,
 		content 	: String,
@@ -31,7 +38,7 @@ var settings = new Schema({
 });
 
 mongoose.model( 'personas', personas );
-mongoose.model( 'admin', admin );
+mongoose.model( 'admins', admins );
 mongoose.model( 'conversations', conversations );
 
 mongoose.model( 'settings', settings );
