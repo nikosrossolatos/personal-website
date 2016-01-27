@@ -21,7 +21,6 @@ router.put('/conversations/:conversation_id', function(req, res, next) {
   })
 });
 router.post('/conversations/:conversation_id',function (req,res,next){
-  var persona = req.body.persona;
   var message = req.body.message;
   var _id = req.params.conversation_id;
   var messageObj = {
@@ -47,7 +46,7 @@ router.post('/conversations/:conversation_id',function (req,res,next){
 
       //Socket response
       res.locals.surge.emit('dashboard','update conversation',conversation);
-      res.locals.surge.emit(persona._id,'response',{response:message});
+      res.locals.surge.emit(conversation.persona,'response',{response:message});
       res.status(200).json(messageObj);
     })
   });
@@ -60,7 +59,7 @@ router.get('/settings', function(req, res, next) {
 
 router.put('/settings', function(req, res, next) {
   settings.findOneAndUpdate({},{autopilot:req.body.autopilot},function(err,settings){
-  	res.json({status:'ok'});
+  	res.status(200).json({status:'ok'});
   })
 });
 

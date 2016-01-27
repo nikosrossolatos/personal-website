@@ -42,7 +42,7 @@ app.use(passport.session());
 
 //initialize surge
 app.use(function(req,res, next) {
-  res.locals.surge = new Surge({debug:true});
+  res.locals.surge = new Surge();
   res.locals.surge.subscribe('dashboard');
   next();
 });

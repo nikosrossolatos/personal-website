@@ -9,7 +9,10 @@ var settings = mongoose.model( 'settings', settings );
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { channel: req.cookies.persona });
+	var persona_id;
+	// Check cookies.js for req.persona._id
+	req.cookies.persona ? persona_id = req.cookies.persona : persona_id = req.persona._id;
+  res.render('index', { channel: persona_id });
 });
 
 router.post('/message',function(req,res){
